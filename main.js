@@ -53,6 +53,7 @@ const cardArray = [
 cardArray.sort(() => 0.5 - Math.random())
 
 const gridDisplay = document.querySelector('#grid')
+const resultDisplay = document.querySelector('#result')
 let cardsChosen = []
 let cardsChosenIds = []
 const cardsWon = []
@@ -74,6 +75,8 @@ function checkMatch() {
     const optionOneId = cardsChosenIds[0]
     const optionTwoId = cardsChosenIds[1]
     if(optionOneId == optionTwoId){
+        cards[optionOneId].setAttribute('src', 'imgs/blank-memgame.png')
+        cards[optionTwoId].setAttribute('src', 'imgs/blank-memgame.png')
         console.log('You clicked the same card!')
     }
 
@@ -87,10 +90,16 @@ function checkMatch() {
     } else {  
         cards[optionOneId].setAttribute('src', 'imgs/blank-memgame.png')
         cards[optionTwoId].setAttribute('src', 'imgs/blank-memgame.png')
+        alert('sorry try again!')
     }
 
+    resultDisplay.textContent = cardsWon.length
     cardsChosen = []
     cardsChosenIds = []
+
+    if(cardsWon.length == (cardArray.length/2)){
+        resultDisplay.textContent = 'Congratulations! You found them all!'
+    }
 }
 
 
